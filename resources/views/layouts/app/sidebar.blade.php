@@ -15,7 +15,21 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="wrench-screwdriver" :href="route('equipment.index')" :current="request()->routeIs('equipment.*')" wire:navigate>
+                        {{ __('Equipment') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
+
+                @if (auth()->user()->isAdministrator())
+                    <flux:sidebar.group :heading="__('Administration')" class="grid">
+                        <flux:sidebar.item icon="cog-6-tooth" :href="route('admin.equipment.index')" :current="request()->routeIs('admin.equipment.*')" wire:navigate>
+                            {{ __('Manage Equipment') }}
+                        </flux:sidebar.item>
+                        <flux:sidebar.item icon="users" :href="route('admin.users.index')" :current="request()->routeIs('admin.users.*')" wire:navigate>
+                            {{ __('Manage Users') }}
+                        </flux:sidebar.item>
+                    </flux:sidebar.group>
+                @endif
             </flux:sidebar.nav>
 
             <flux:spacer />
